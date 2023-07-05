@@ -6,6 +6,12 @@ const {conn} = require('./src/db.js');
 const {getApi} = require('./src/connectionApi/ConnectionApi');
 const PORT = 3001;
 
+server.use(express.static(path.join(__dirname, 'build')));
+
+server.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 conn
   .sync()
   .then(async () => {
