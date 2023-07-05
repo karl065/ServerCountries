@@ -8,19 +8,7 @@ const PORT = 3001;
 
 server.use(express.static(path.join(__dirname, 'build')));
 
-server.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-server.get('/home', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-server.get('/createactivity', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-server.get('/detail', function (req, res) {
+server.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
