@@ -1,12 +1,7 @@
-const express = require('express');
-const path = require('path');
-
 const server = require('./src/server');
 const {conn} = require('./src/db.js');
 const {getApi} = require('./src/connectionApi/ConnectionApi');
 const PORT = 3001;
-
-server.use(express.static(path.join(__dirname, 'build')));
 
 conn
   .sync()
