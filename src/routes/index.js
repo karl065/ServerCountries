@@ -7,7 +7,7 @@ const router = Router();
 router.use('/countries', countries);
 router.use('/activities', activities);
 
-router.get('*', function (req, res) {
+router.get('*', (req, res) => {
   res.redirect('https://clientcountries.onrender.com' + req.originalUrl);
 });
 
