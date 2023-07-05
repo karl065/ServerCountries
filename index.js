@@ -6,6 +6,11 @@ const PORT = 3001;
 conn
   .sync()
   .then(async () => {
+    server.use(express.static(path.join(__dirname, 'build')));
+
+    server.get('/*', function (req, res) {
+      res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    });
     server.listen(PORT, () => {
       console.log(`Server listening on port ${PORT}`);
     });
