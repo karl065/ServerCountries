@@ -20,9 +20,8 @@ server.use(express.static('public'));
 
 server.use(router);
 
-server.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({error: err.message});
+server.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 module.exports = server;
