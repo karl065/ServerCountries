@@ -24,6 +24,10 @@ server.get('/detail', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+server.get('*', function (req, res) {
+  res.redirect('https://clientcountries.onrender.com' + req.originalUrl);
+});
+
 conn
   .sync()
   .then(async () => {
