@@ -16,7 +16,7 @@ server.use(
   })
 );
 
-server.use(express.static(path.join(__dirname, 'build')));
+server.use(express.static('public'));
 
 server.use(router);
 
