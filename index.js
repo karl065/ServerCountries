@@ -8,15 +8,6 @@ const PORT = 3001;
 
 server.use(express.static(path.join(__dirname, 'build')));
 
-server.get('/countries', (req, res) => {
-  // Manejo de la ruta '/api/example'
-  res.send('Respuesta desde el backend');
-});
-
-server.get('*', function (req, res) {
-  res.redirect('https://clientcountries.onrender.com' + req.originalUrl);
-});
-
 conn
   .sync()
   .then(async () => {
