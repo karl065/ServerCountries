@@ -21,7 +21,7 @@ server.use(express.static('public'));
 server.use(router);
 
 server.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.redirect('/');
 });
 
 module.exports = server;
