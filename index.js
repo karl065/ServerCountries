@@ -6,7 +6,7 @@ const PORT = 3001;
 conn
   .sync()
   .then(async () => {
-    server.listen(PORT, () => {
+    server.listen(PORT, 0.0.0.0,() => {
       console.log(`Server listening on port ${PORT}`);
     });
     await getApi();
