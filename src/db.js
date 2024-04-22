@@ -1,19 +1,15 @@
-require('dotenv').config();
-const {Sequelize} = require('sequelize');
-const fs = require('fs');
-const path = require('path');
-const {DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY} = process.env;
+require("dotenv").config();
+const { Sequelize } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
+const { RDS_HOSTNAME, RDS_PORT, RDS_DB_NAME, RDS_USERNAME, RDS_PASSWORD } =
+  process.env;
 
-// const sequelize = new Sequelize(
-//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`,
-//   {
-//     logging: false,
-//     native: false,
-//   }
-// );
-const sequelize = new Sequelize(DB_DEPLOY, {
-  dialect: 'postgres',
-  protocol: 'postgres',
+const sequelize = new Sequelize(RDS_DB_NAME, RDS_USERNAME, RDS_PASSWORD, {
+  host: RDS_HOSTNAME,
+  port: RDS_PORT,
+  dialect: "postgres",
+  protocol: "postgres",
   dialectOptions: {
     ssl: true,
   },
@@ -22,13 +18,13 @@ const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
-fs.readdirSync(path.join(__dirname, '/models'))
+fs.readdirSync(path.join(__dirname, "/models"))
   .filter(
     (file) =>
-      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
   )
   .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, '/models', file)));
+    modelDefiners.push(require(path.join(__dirname, "/models", file)));
   });
 
 modelDefiners.forEach((model) => model(sequelize));
@@ -40,16 +36,16 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const {Country, Activity} = sequelize.models;
+const { Country, Activity } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 Country.belongsToMany(Activity, {
-  through: 'CountryActivity',
+  through: "CountryActivity",
   timestamps: false,
 });
 Activity.belongsToMany(Country, {
-  through: 'CountryActivity',
+  through: "CountryActivity",
   timestamps: false,
 });
 
