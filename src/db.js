@@ -9,9 +9,13 @@ const sequelize = new Sequelize(RDS_DB_NAME, RDS_USERNAME, RDS_PASSWORD, {
   host: RDS_HOSTNAME,
   port: RDS_PORT,
   dialect: "postgres",
-  protocol: "postgres",
+  logging: false,
+  native: false,
   dialectOptions: {
-    ssl: true,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, // Para evitar errores con certificados autofirmados
+    },
   },
 });
 const basename = path.basename(__filename);
